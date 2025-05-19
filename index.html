@@ -9,28 +9,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --background: #121212;
-            --surface: #1e1e1e;
-            --surface-variant: #252525;
-            --primary: #7c4dff;
-            --primary-variant: #6736f0;
-            --secondary: #03dac6;
-            --text-primary: #e1e1e1;
-            --text-secondary: #b0b0b0;
-            --border: rgba(255, 255, 255, 0.1);
-            --shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            --user-message: #7c4dff;
-            --bot-message: #2d2d2d;
-            --container-width: 800px;
-            --border-radius: 16px;
-            --input-radius: 24px;
+            --background: #0d0d0d;
+            --surface: #1c1c1e;
+            --surface-variant: #2c2c2e;
+            --primary: #0A84FF;
+            --primary-variant: #0073e6;
+            --secondary: #30D158; /* Apple Green for status */
+            --text-primary: #F5F5F7;
+            --text-secondary: #8e8e93;
+            --border: rgba(84, 84, 88, 0.4);
+            --shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+            --user-message-bg: var(--primary);
+            --bot-message-bg: #3A3A3C;
+            --input-bg: #2c2c2e; /* Slightly darker than surface-variant for subtle depth */
+            --input-bg-focus: #38383b;
+            --warning-text: #FF3B30; /* Apple Red */
+
+            --container-width: 900px;
+            --border-radius-container: 16px;
+            --border-radius-message: 18px;
+            --border-radius-message-tail: 6px;
+            --border-radius-input: 10px; /* Sharper input field */
+            
+            /* RGB values for rgba usage with primary color */
+            --rgb-primary: 10, 132, 255;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
         }
 
         body {
@@ -42,25 +51,24 @@
             align-items: center;
             justify-content: center;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         #appHeader {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 30px; /* Increased margin */
         }
 
         #appHeader h1 {
-            font-size: 32px;
+            font-size: 34px; /* Slightly larger */
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 8px;
+            color: var(--text-primary); /* Solid color */
+            margin-bottom: 10px;
         }
 
         #appHeader p {
-            font-size: 14px;
+            font-size: 15px; /* Slightly larger */
             color: var(--text-secondary);
             font-weight: 500;
         }
@@ -71,19 +79,18 @@
             height: 75vh;
             max-height: 700px;
             background-color: var(--surface);
-            border-radius: var(--border-radius);
+            border-radius: var(--border-radius-container);
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             position: relative;
-            backdrop-filter: blur(10px);
             border: 1px solid var(--border);
         }
 
         #fileLoadSection {
-            padding: 16px;
-            background-color: rgba(124, 77, 255, 0.08);
+            padding: 16px 20px;
+            background-color: var(--surface-variant); /* More neutral */
             text-align: center;
             border-bottom: 1px solid var(--border);
         }
@@ -95,19 +102,19 @@
         }
 
         .warning {
-            color: #FF453A;
+            color: var(--warning-text);
             font-weight: 600;
         }
 
         #chatbox {
             flex: 1;
             overflow-y: auto;
-            padding: 20px;
+            padding: 24px; /* Increased padding */
             scroll-behavior: smooth;
         }
 
         #chatbox::-webkit-scrollbar {
-            width: 6px;
+            width: 8px;
         }
 
         #chatbox::-webkit-scrollbar-track {
@@ -115,20 +122,20 @@
         }
 
         #chatbox::-webkit-scrollbar-thumb {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
         }
 
         #chatbox::-webkit-scrollbar-thumb:hover {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         .message {
             max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            margin-bottom: 12px;
-            line-height: 1.5;
+            padding: 12px 18px; /* Adjusted padding */
+            border-radius: var(--border-radius-message);
+            margin-bottom: 14px; /* Increased margin */
+            line-height: 1.55; /* Improved line height */
             word-wrap: break-word;
             font-size: 15px;
             position: relative;
@@ -141,21 +148,21 @@
         }
 
         .user {
-            background-color: var(--user-message);
+            background-color: var(--user-message-bg);
             color: white;
             margin-left: auto;
-            border-bottom-right-radius: 4px;
+            border-bottom-right-radius: var(--border-radius-message-tail);
         }
 
         .bot {
-            background-color: var(--bot-message);
+            background-color: var(--bot-message-bg);
             color: var(--text-primary);
             margin-right: auto;
-            border-bottom-left-radius: 4px;
+            border-bottom-left-radius: var(--border-radius-message-tail);
         }
 
         .bot.thinking {
-            background-color: rgba(45, 45, 45, 0.7);
+            background-color: rgba(58, 58, 60, 0.8); /* Based on --bot-message-bg */
             position: relative;
             overflow: hidden;
         }
@@ -165,7 +172,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 2px;
+            height: 3px; /* Slightly thicker bar */
             width: 50%;
             background: linear-gradient(90deg, transparent, var(--secondary), transparent);
             animation: loadingBar 1.5s infinite;
@@ -177,7 +184,7 @@
         }
 
         #chatInputSection {
-            padding: 16px 20px;
+            padding: 16px 24px; /* Adjusted padding */
             background-color: var(--surface-variant);
             display: flex;
             align-items: center;
@@ -186,24 +193,25 @@
 
         #userInput {
             flex: 1;
-            background-color: rgba(255, 255, 255, 0.08);
-            border: none;
+            background-color: var(--input-bg);
+            border: 1px solid transparent; /* Start with transparent border */
             color: var(--text-primary);
             padding: 14px 20px;
-            border-radius: var(--input-radius);
+            border-radius: var(--border-radius-input);
             font-size: 15px;
             outline: none;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         #userInput::placeholder {
             color: var(--text-secondary);
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
         #userInput:focus {
-            background-color: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.3);
+            background-color: var(--input-bg-focus);
+            border-color: rgba(var(--rgb-primary), 0.5); /* Subtle border on focus */
+            box-shadow: 0 0 0 3px rgba(var(--rgb-primary), 0.2); /* Focus ring */
         }
 
         #sendButton {
@@ -212,27 +220,34 @@
             border: none;
             width: 48px;
             height: 48px;
-            border-radius: 50%;
+            border-radius: 50%; /* Perfect circle */
             margin-left: 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 10px rgba(124, 77, 255, 0.3);
+            transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+            box-shadow: 0 3px 8px rgba(var(--rgb-primary), 0.2);
         }
 
         #sendButton:hover {
             background-color: var(--primary-variant);
-            transform: scale(1.05);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(var(--rgb-primary), 0.25);
         }
 
         #sendButton:active {
-            transform: scale(0.95);
+            transform: translateY(0px) scale(0.96);
+            box-shadow: 0 2px 6px rgba(var(--rgb-primary), 0.2);
+        }
+        
+        #sendButton svg {
+            width: 20px;
+            height: 20px;
         }
 
         .powered-by {
-            margin-top: 14px;
+            margin-top: 20px; /* Increased margin */
             font-size: 12px;
             color: var(--text-secondary);
             text-align: center;
@@ -245,36 +260,58 @@
         }
 
         /* Responsive adjustments */
-        @media (max-width: 768px) {
-            #chatContainer {
+        @media (max-width: 920px) { /* Adjusted breakpoint for wider container */
+             #chatContainer {
                 height: 80vh;
+                max-width: 95%;
             }
-            
+        }
+        
+        @media (max-width: 768px) {
             .message {
                 max-width: 90%;
+            }
+             #appHeader h1 {
+                font-size: 30px;
+            }
+            #appHeader p {
+                font-size: 14px;
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
             #appHeader h1 {
-                font-size: 28px;
+                font-size: 26px;
             }
-            
+            #appHeader p {
+                font-size: 13px;
+            }
             #chatContainer {
-                height: 85vh;
+                height: calc(100vh - 40px); /* Adjust for full height on mobile */
+                max-height: none;
+                border-radius: var(--border-radius-container) var(--border-radius-container) 0 0; /* Top radius only if full height */
             }
-            
-            #chatInputSection {
-                padding: 12px;
-            }
-            
-            #userInput {
+             #chatInputSection {
                 padding: 12px 16px;
             }
-            
+            #userInput {
+                padding: 12px 16px;
+                font-size: 14px;
+            }
             #sendButton {
                 width: 44px;
                 height: 44px;
+            }
+            #sendButton svg {
+                width: 18px;
+                height: 18px;
+            }
+            .message {
+                font-size: 14px;
+                padding: 10px 14px;
             }
         }
     </style>
@@ -282,7 +319,7 @@
 <body>
 
 <div id="appHeader">
-    <h1>DigiBase 1.1</h1>
+    <h1>DigiBase 1.2</h1>
     <p>Uw interne virtuele assistent van Digipunt</p>
 </div>
 
@@ -296,7 +333,7 @@
     <div id="chatInputSection">
         <input type="text" id="userInput" placeholder="Stel uw vraag aan Digipunt...">
         <button id="sendButton" onclick="sendMessage()" aria-label="Verstuur bericht">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22 2L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -304,7 +341,7 @@
     </div>
 </div>
 
-<div class="powered-by">Powered by Gemini AI</div>
+
 
 <script>
     // --- CONFIGURATIE ---
@@ -524,6 +561,7 @@ Antwoord (in het Nederlands/Vlaams):
     // --- INITIALISATIE ---
     window.onload = () => {
         if (!GEMINI_API_KEY || GEMINI_API_KEY === "YOUR_GEMINI_API_KEY_HERE" || GEMINI_API_KEY.startsWith("AIzaSyB04OBGNKEWmZp1WSvgAjjDzYMe9SGE_fU")) {
+             // Updated the check to cover both placeholder values accurately
             loadStatus.innerHTML = `Welkom! <span class="warning">Configureer a.u.b. uw Gemini API Key in het script. De huidige key is een placeholder.</span>`;
         } else {
             loadDataFromUrl(); // Automatisch data laden
