@@ -132,7 +132,7 @@ Vrijdag Gesloten
 Zaterdag Gesloten
 Zondag Gesloten
 
-### Bib Watersportbaan ###
+### Bibliotheek Watersportbaan ###
 Locatie: Neermeerskaai 1b
 Openingstijden:
 Maandag Gesloten
@@ -143,7 +143,7 @@ Vrijdag Gesloten
 Zaterdag Gesloten
 Zondag Gesloten
 
-### Bib Brugse Poort ###
+### Bibliotheek Brugse Poort ###
 Locatie: Blazoenstraat 9
 Openingstijden:
 Maandag Gesloten
@@ -154,7 +154,7 @@ Vrijdag Gesloten
 Zaterdag Gesloten
 Zondag Gesloten
 
-### Bib Sint-Amandsberg ###
+### Bibliotheek Sint-Amandsberg ###
 Locatie: Halvemaanstraat 92
 Openingstijden:
 Maandag Gesloten
